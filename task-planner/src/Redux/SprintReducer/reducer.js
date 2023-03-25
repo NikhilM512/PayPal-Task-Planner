@@ -1,5 +1,5 @@
 import React from 'react'
-import { ADD_SPRINT_FAILURE, ADD_SPRINT_REQUEST, ADD_SPRINT_SUCCESS } from './actionTypes';
+import { ADD_SPRINTS_FAILURE, ADD_SPRINTS_REQUEST, ADD_SPRINTS_SUCCESS, ADD_SPRINT_FAILURE, ADD_SPRINT_REQUEST, ADD_SPRINT_SUCCESS } from './actionTypes';
 
 const initialState={
     sprints:[],
@@ -33,6 +33,28 @@ const reducer = (state=initialState,action) => {
                 isError:true,
                 err_msg:payload
             }
+        
+            case ADD_SPRINTS_REQUEST:
+                return {
+                    ...state,
+                    isLoading:true,
+                    loading_msg:payload
+                }
+    
+            case ADD_SPRINTS_SUCCESS:
+                return {
+                    ...state,
+                    sprints:payload,
+                    isLoading:false
+                }
+    
+            case ADD_SPRINTS_FAILURE:
+                return {
+                    ...state,
+                    isLoading:false,
+                    isError:true,
+                    err_msg:payload
+                }
         default:
             return state
      }

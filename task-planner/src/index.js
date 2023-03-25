@@ -7,14 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './Redux/store';
 import {Provider} from 'react-redux'
+import AppContextProvider from './Context/AppContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ChakraProvider>
     <BrowserRouter>
+    <AppContextProvider>
     <Provider store={store}>
     <App />
     </Provider>
+    </AppContextProvider>
     </BrowserRouter>
   </ChakraProvider>
 );
