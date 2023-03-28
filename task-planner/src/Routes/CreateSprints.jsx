@@ -4,8 +4,8 @@ import React from 'react'
 const CreateSprints = () => {
   return (
     <FormControl>
-    <FormLabel>Email address</FormLabel>
-    <Input type='email' />
+    <FormLabel>Sprint</FormLabel>
+    <Input type='text' />
     </FormControl>
   )
 }
