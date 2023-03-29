@@ -93,11 +93,17 @@ const Login = () => {
 
         navigate("/");
 
-      }else{
+      } else if(res.message=="Log-In Failed. Please Sign Up."){
+
+        navigate("/register");
+
+      } else{
 
         setEmail("");
 
         setPassword("");
+
+        navigate("/register");
 
       }
       
@@ -120,15 +126,15 @@ const Login = () => {
   return (
     <>
     <Box bg="bisque" borderRadius="10px" textAlign="start" w="50%" p="5%" border="2px solid #ccc" margin="auto" mt="100px" mb="10%">
-        <Heading fontSize={"33px"} fontWeight="bold">Login</Heading>
+        <Heading fontSize={"33px"}  fontStyle='italic' color='purple' fontWeight="bold">Login</Heading>
         <FormControl display={"flex"} flexDirection={"column"} jc="center" >
-            <FormLabel mt="5%">Email address</FormLabel>
+            <FormLabel color='purple' mt="5%">Email address</FormLabel>
             <Input onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="Enter Your Email" pl="2%" borderRadius={"7px"} h="33px" type='email'  border={"1px solid #ccc"}/>
             <FormHelperText>We'll never share your email.</FormHelperText>
-            <FormLabel mt="5%">Password</FormLabel>
+            <FormLabel color='purple' mt="5%">Password</FormLabel>
             <Input onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="Enter Your Password" borderRadius={"7px"} h="33px" pl="2%" type='password' border={"1px solid #ccc"}/>
             <FormHelperText>We'll never share your password.</FormHelperText>
-            <Button onClick={handleLogin} isDisabled={disable} margin="auto" mt="5%" bg="gray" p="1%" borderRadius={"7px"}>SUBMIT</Button>
+            <Button onClick={handleLogin} isDisabled={disable} margin="auto" mt="5%" bg="purple" p="2%" borderRadius={"7px"}>LOGIN</Button>
         </FormControl>
     </Box>
     </>

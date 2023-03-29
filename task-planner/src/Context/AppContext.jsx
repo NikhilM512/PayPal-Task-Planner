@@ -4,7 +4,11 @@ const AppContext = createContext()
 
 function AppContextProvider({children}) {
 
-    const [authState,setState] = useState({isAuth:false,token:null})
+    let token=JSON.parse(localStorage.getItem("Token")) || "";
+    let isAuth=token?true:false;
+    console.log(isAuth)
+    const [authState,setState] = useState({isAuth,token:null});
+    
 
     const logIn = (token) => {
         setState({isAuth:true,token:token})

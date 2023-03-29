@@ -23,6 +23,10 @@ import {
   AccordionPanel,
   AccordionIcon,
   Heading,
+  Spinner,
+  SkeletonCircle,
+  SkeletonText,
+  Image,
 } from '@chakra-ui/react';
 import { MdPendingActions } from 'react-icons/md';
 import { AiOutlineFileDone } from 'react-icons/ai';
@@ -43,6 +47,7 @@ const Home = () => {
   const [data,setData] = useState([]);
 
   const sprints=useSelector((store)=>store.SprintReducer.sprints);
+  const isLoading=useSelector((store)=>store.SprintReducer.isLoading);
   
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -210,7 +215,24 @@ const Home = () => {
 
     fetchData("https://charming-pumps.cyclic.app/sprint");
 
-  },[])
+  },[]);
+
+  if(isLoading){
+    return (<>
+    <Heading color='purple' mb="7%">...Loading</Heading>
+          <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='blue.500'
+              size='xl'
+          />
+          <Box padding='6' boxShadow='lg' bg='rgb(219, 165, 151)'>
+            <SkeletonCircle size='10' />
+            <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+          </Box>
+    </>)
+  }
 
   return (
     <>

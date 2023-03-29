@@ -25,6 +25,9 @@ import {
   Heading,
   Select,
   VStack,
+  SkeletonCircle,
+  Spinner,
+  SkeletonText,
 } from '@chakra-ui/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,6 +54,7 @@ const Dashboard = () => {
   const [status,setStatus] = useState("");
 
   const tasks=useSelector((store)=>store.TaskReducer.tasks);
+  const isLoading=useSelector((store)=>store.SprintReducer.isLoading);
   
   const dispatch=useDispatch();
 
@@ -271,6 +275,24 @@ const Dashboard = () => {
     setTaskDoneData(data3);
 
   },[tasks]);
+
+
+  if(isLoading){
+    return (<>
+    <Heading color='purple' mb="7%">...Loading</Heading>
+          <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='blue.500'
+              size='xl'
+          />
+          <Box padding='6' boxShadow='lg' bg='rgb(219, 165, 151)'>
+            <SkeletonCircle size='10' />
+            <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+          </Box>
+    </>)
+  }
 
 
   return (

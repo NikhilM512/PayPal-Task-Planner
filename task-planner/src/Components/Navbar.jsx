@@ -1,5 +1,5 @@
 import { Box, Button, Heading, HStack, Input, useDisclosure, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import {
   Drawer,
@@ -12,14 +12,18 @@ import {
   Icon,
 } from '@chakra-ui/react'
 import {GiHamburgerMenu} from "react-icons/gi";
+import { AppContext } from '../Context/AppContext';
 
 const Navbar = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
+  const {logOut} = useContext(AppContext);
+
   const handleLogout=()=>{
     localStorage.removeItem("Token");
+    logOut()
   }
 
   return (
@@ -45,12 +49,12 @@ const Navbar = () => {
         <DrawerOverlay />
         <DrawerContent bg='bisque'>
           <DrawerCloseButton />
-          <DrawerHeader color={'purple'} textAlign='center' fontSize={33}>PayPal Task Planner</DrawerHeader>
+          <DrawerHeader color={'purple'} textAlign='center' fontWeight={'bold'} fontSize={33} fontStyle='italic'>PayPal Task Planner</DrawerHeader>
 
           <DrawerBody>
-          <VStack w='100%' justifyContent={'flex-end'} pr="5%" color={'purple'}>
-            <Link to="/login"><Button bg="yellowgreen">LOGIN</Button></Link>
+          <VStack w='100%' h='40%' justifyContent={'space-between'} pt="7%" alignItems='center' pr="5%" color={'purple'}>
             <Link to="/register"><Button bg="yellowgreen">REGISTER</Button></Link>
+            <Link to="/login"><Button bg="yellowgreen">LOGIN</Button></Link>
             <Button bg="yellowgreen" onClick={handleLogout}>LOGOUT</Button>
           </VStack>
           </DrawerBody>
